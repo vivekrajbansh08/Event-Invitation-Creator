@@ -33,3 +33,24 @@ textarea {
   border: 1px solid #3498db;
   outline: none;
 }
+
+input:focus,
+textarea:focus {
+  border-color: #ff5722;
+}
+
+/* Submit button */
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff7d33;
+}
