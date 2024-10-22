@@ -19,8 +19,21 @@ document.getElementById("eventForm").addEventListener("submit", function (e) {
     displayErrorMessage("Please fill in all fields.");
     return;
   }
+  // Hide form after submission
+  document.getElementById("eventForm").style.display = "none";
 
-  // Proceed with Task 10
+  // Create event invite section
+  const inviteSection = document.createElement("div");
+  inviteSection.className = "invite-section";
+  inviteSection.innerHTML = `
+      <h2>${eventName}</h2>
+      <p><strong>Date:</strong> ${eventDate}</p>
+      <p><strong>Time:</strong> ${startTime} - ${endTime}</p>
+      <p><strong>Location:</strong> ${location}</p>
+      <p>${description}</p>
+  `;
+
+  document.body.appendChild(inviteSection);
 });
 
 function displayErrorMessage(message) {
