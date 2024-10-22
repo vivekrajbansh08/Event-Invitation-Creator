@@ -7,27 +7,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Create an Event Invite</h1>
-    <div class="form-container">
-      <form id="eventForm">
-        <label for="eventName">Event Name:</label>
-        <input type="text" id="eventName" name="eventName" required />
-
-        <label for="eventDate">Date:</label>
-        <input type="date" id="eventDate" name="eventDate" required />
-
-        <label for="startTime">Start Time:</label>
-        <input type="time" id="startTime" name="startTime" required />
-
-        <label for="endTime">End Time:</label>
-        <input type="time" id="endTime" name="endTime" required />
-
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" required />
-
+    <div class="form-container" id="eventForm">
+      <h1>Create an Event Invite</h1>
+      <form>
+        <input
+          type="text"
+          id="eventName"
+          name="eventName"
+          placeholder="Event Name"
+        />
+        <input type="date" id="eventDate" name="eventDate" />
+        <input type="time" id="startTime" name="startTime" />
+        <input type="time" id="endTime" name="endTime" />
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Description"
+        ></textarea>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          placeholder="Location"
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
