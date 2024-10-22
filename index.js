@@ -1,4 +1,45 @@
-document.getElementById("eventForm").addEventListener("submit", function (e) {
+function displayErrorMessage() {
+  const overlay = document.createElement("div");
+  overlay.className = "error-overlay";
+
+  const messageContainer = document.createElement("div");
+  messageContainer.className = "error-message";
+  messageContainer.textContent = "Please fill in all fields";
+
+  const closeButton = document.createElement("button");
+  closeButton.className = "close-button";
+  closeButton.textContent = "×";
+  messageContainer.appendChild(closeButton);
+
+  overlay.appendChild(messageContainer);
+  document.body.appendChild(overlay);
+
+  const closeError = () => overlay.remove();
+  closeButton.addEventListener("click", closeError);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeError();
+  });
+}
+
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function formatTime(timeStr) {
+  return new Date(`2000/01/01 ${timeStr}`).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+}
+
+document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const eventName = document.getElementById("eventName").value;
@@ -16,51 +57,27 @@ document.getElementById("eventForm").addEventListener("submit", function (e) {
     !description ||
     !location
   ) {
-    displayErrorMessage("Please fill in all fields.");
+    displayErrorMessage();
     return;
   }
-  // Hide form after submission
+
+  // Hide form
   document.getElementById("eventForm").style.display = "none";
 
-  // Create event invite section
-  const inviteSection = document.createElement("div");
-  inviteSection.className = "invite-section";
-  inviteSection.innerHTML = `
-      <h2>${eventName}</h2>
-      <p><strong>Date:</strong> ${eventDate}</p>
-      <p><strong>Time:</strong> ${startTime} - ${endTime}</p>
-      <p><strong>Location:</strong> ${location}</p>
-      <p>${description}</p>
-  `;
+  // Create digital invitation
+  const invitation = document.createElement("div");
+  invitation.className = "digital-invite";
+  invitation.innerHTML = `
+            <div class="invite-header">YOU ARE INVITED</div>
+            <div class="invite-subheader">TO JOIN THE</div>
+            <div class="event-name">${eventName}</div>
+            <div class="event-date">${formatDate(eventDate)}</div>
+            <div class="event-time">${formatTime(startTime)} - ${formatTime(
+    endTime
+  )}</div>
+            <div class="event-location">${location}</div>
+            <div class="event-description">${description}</div>
+        `;
 
-  document.body.appendChild(inviteSection);
+  document.body.appendChild(invitation);
 });
-
-function displayErrorMessage(message) {
-  const errorContainer = document.createElement("div");
-  errorContainer.textContent = message;
-  errorContainer.style.backgroundColor = "#e74c3c";
-  errorContainer.style.color = "white";
-  errorContainer.style.padding = "10px";
-  errorContainer.style.marginBottom = "15px";
-  errorContainer.style.borderRadius = "5px";
-
-  document.body.insertBefore(
-    errorContainer,
-    document.getElementById("eventForm")
-  );
-
-  const closeButton = document.createElement("button");
-  closeButton.textContent = "X";
-  closeButton.style.marginLeft = "10px";
-  closeButton.style.background = "none";
-  closeButton.style.border = "none";
-  closeButton.style.color = "white";
-  closeButton.style.cursor = "pointer";
-
-  closeButton.addEventListener("click", function () {
-    errorContainer.remove();
-  });
-
-  errorContainer.appendChild(closeButton);
-}
