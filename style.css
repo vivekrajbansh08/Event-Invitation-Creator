@@ -13,3 +13,11 @@ body {
   max-width: 500px;
   margin: 50px auto;
 }
+
+/* Heading */
+h1 {
+  color: #0d47a1;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
